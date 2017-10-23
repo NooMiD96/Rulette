@@ -23,11 +23,11 @@ bld/
 [Ll]og/
 
 # Texture images and sound for B4W 
-Texture/
-Sound/
+# Texture/
+# Sound/
 
 # Config files
-appsettings.*
+# appsettings.*
 
 # Visual Studio 2015 cache/options directory
 .vs/
