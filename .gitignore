@@ -22,6 +22,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+# Visual Studio Code
+.vscode/
+
 # Texture images and sound for B4W 
 # Texture/
 # Sound/
