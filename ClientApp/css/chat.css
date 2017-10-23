@@ -1,0 +1,37 @@
+.chat-messages{
+    height: 88%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.chat-container{
+    height: 100%;
+}
+.message-content{
+    word-break: break-word;
+    color: white;
+}
+/* 
+.input-chat{
+    box-shadow: none;
+} */
+.input-chat, .input-chat:focus{
+    border-color: #ccc;
+    box-shadow: none;
+}
+.input-chat-addon, .input-chat{
+    border-radius: unset;
+}
+.input-chat {
+    background-color: transparent;
+    color: white;
+}
+.disabled {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0) !important;
+}
+.disabled::placeholder {
+    color: rgba(255, 255, 255, 0) !important;
+}
+.message{
+    padding: 2px 3px 1px 5px;
+}
