@@ -25,6 +25,12 @@ bld/
 # Visual Studio Code
 .vscode/
 
+# npm install package
+npm-shrinkwrap.json
+
+# build client data
+**/dist/
+
 # Texture images and sound for B4W 
 # Texture/
 # Sound/

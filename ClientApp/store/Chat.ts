@@ -56,7 +56,13 @@ var socket: WebSocket;
 
 export const actionCreators = {
     subscribeToMessages: (): AppThunkAction<SubscribeToMessagesAction | GetMessageAction> => (dispatch, getState) => {
-        socket = new WebSocket("ws://localhost:60217/ws");
+        // var hostUri = "ws://localhost:60217/ws";
+        var hostUri = "http://localhost:60217/";
+        if(document.baseURI) {
+            hostUri = document.baseURI;
+        }
+        var socketUri = hostUri.replace('http', 'ws') + "ws";
+        socket = new WebSocket(socketUri);
         socket.onmessage = (event) => { 
             try {
                 const items = JSON.parse(event.data);
