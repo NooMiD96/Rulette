@@ -3,7 +3,12 @@ import { RouteComponentProps } from 'react-router-dom';
 
 export default class Home extends React.Component<RouteComponentProps<{}>, {}> {
     componentDidMount() {
-        this.socket = new WebSocket("ws://localhost:60217/b4w_react");
+        var hostUri = "http://localhost:60217/";
+        if(document.baseURI) {
+            hostUri = document.baseURI;
+        }
+        var socketUri = hostUri.replace('http', 'ws') + "b4w_react";
+        this.socket = new WebSocket(socketUri);
 
         this.socket.onclose = function(event) {
             if (event.wasClean) {

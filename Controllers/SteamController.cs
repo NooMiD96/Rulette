@@ -51,7 +51,7 @@ namespace Rulette.Controllers {
 
             using (var client = new HttpClient()) {
                 try {
-                    var response = await client.GetAsync(new SteamHelper().UserInfoLink(user.UserId));
+                    var response = await client.GetAsync(SteamHelper.UserInfoLink(user.UserId));
                     response.EnsureSuccessStatusCode();
 
                     var responseResult = await response.Content.ReadAsStringAsync();

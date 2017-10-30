@@ -28,7 +28,7 @@ namespace Rulette.Controllers {
         [HttpGet("[action]"), HttpPost("[action]")]
         public IActionResult SignIn() {
             string url = "http://steamcommunity.com/openid/login?";
-            url += new SteamHelper().ParamsOpenid;
+            url += SteamHelper.GetParamsOpenid(Request.Host.ToString());
             return Redirect(url);
         }
         // redirect from steam/login
