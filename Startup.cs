@@ -56,6 +56,7 @@ namespace Rulette {
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            
             app.UseStaticFiles(new StaticFileOptions() {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), @"B4W")),
@@ -63,7 +64,8 @@ namespace Rulette {
             });
             app.UseStaticFiles(new StaticFileOptions() {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"B4W\\assets")),
+                    Path.Combine(Directory.GetCurrentDirectory(), Path.Combine("B4W","assets"))
+                ),
                 RequestPath = new PathString("/assets")
             });
 

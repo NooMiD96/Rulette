@@ -27,6 +27,10 @@ bld/
 
 # npm install package
 npm-shrinkwrap.json
+package-lock.json
+
+# build settings
+Properties/
 
 # build client data
 **/dist/
