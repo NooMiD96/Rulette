@@ -11,14 +11,14 @@ import Lk from './components/Lk';
 import Chat from './components/Chat';
 
 
-export const routes = <Layout>
+export const routes = <div className="contentContainer">
     <Route exact path='/' component={ Home } />
     <Route path='/dota2' component={ Dota2 } />
     <Route path='/csgo' component={ CSGO } />
     <Route exact path='/rules' component={ Rules } />
     <Route exact path='/faq' component={ FAQ } />
     <Route exact path='/lk/:userId?' component={ Lk } />
-</Layout>;
+</div>;
 
 export const popup = Warning;
 

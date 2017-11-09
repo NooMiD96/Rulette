@@ -5,16 +5,16 @@ import { AppThunkAction } from './';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface UserState {
-    getServerData: boolean | null;
-    userInfo: User | null;
+    getServerData: boolean | null,
+    userInfo: User | null,
 }
 export interface User {
-    steamid: string;
-    personaname: string;
-    profileurl: string;
-    avatar: string;
-    avatarmedium: string;
-    avatarfull: string;
+    steamid: string,
+    personaname: string,
+    profileurl: string,
+    avatar: string,
+    avatarmedium: string,
+    avatarfull: string,
 }
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
@@ -26,10 +26,10 @@ interface GetUserInfoAction {
 }
 interface SetUserInfoAction { 
     type: 'SET_USER_INFO',
-    userInfo: User;
+    userInfo: User,
 }
 interface DeleteUserInfoAction { 
-    type: 'DELETE_USER_INFO'
+    type: 'DELETE_USER_INFO',
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the

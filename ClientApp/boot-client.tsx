@@ -12,6 +12,7 @@ import { createBrowserHistory } from 'history';
 import configureStore from './configureStore';
 import { ApplicationState }  from './store';
 import * as RoutesModule from './routes';
+import * as Layout from './container/Layout';
 let routes = RoutesModule.routes;
 let popup  = RoutesModule.popup;
 let chat   = RoutesModule.chat;
@@ -41,7 +42,7 @@ function renderApp() {
     ReactDOM.render(
         <AppContainer>
             <Provider store={ store }>
-                <ConnectedRouter history={ history } children={ routes } />
+                {React.createElement(Layout.default, { history } as Layout.IStateProps & Layout.IDispatchProps, routes) }
             </Provider>
         </AppContainer>,
         document.getElementById('react-app')

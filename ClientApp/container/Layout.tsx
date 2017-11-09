@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link, RouteComponentProps, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { routerReducer } from 'react-router-redux';
-import { NavMenu } from '../components/NavMenu';
+import { routerReducer, ConnectedRouter } from 'react-router-redux';
+import { NavMenu }  from '../components/NavMenu';
+import { History } from 'history';
 import Login from '../components/Login';
 import Warning from '../components/Warning';
 import Logout from '../components/Logout';
@@ -11,12 +11,12 @@ import * as UserState from '../store/User';
 import * as ModalState from '../store/Modal';
 import Chat from '../components/Chat';
 
-interface IStateProps {
+export interface IStateProps {
+    history:    History,
+    children:   JSX.Element,
     user:       UserState.UserState,
-    routing:    typeof routerReducer,
-    children:   Element[],
 }
-interface IDispatchProps {
+export interface IDispatchProps {
     getUserInfo:        () => any,
     deleteUserInfo:     () => any,
     closeModal:         () => any,
@@ -28,11 +28,10 @@ type UserProps =
     //& typeof UserState.actionCreators   // ... plus action creators we've requested
     //& typeof ModalState.actionCreators
     IStateProps
-    & IDispatchProps
-    & RouteComponentProps<{}>;          // ... plus incoming routing parameters   
+    & IDispatchProps;
+    //& RouteComponentProps<{}>;          // ... plus incoming routing parameters   
 
-class Layout extends React.Component<UserProps | any, {}> {
-    // readonly warningComponent = new Warning();
+export class Layout extends React.Component<UserProps, {}> {
     // if user not login, render login component
     LoginOrLogout: any;
     // check auth of user
@@ -87,20 +86,19 @@ class Layout extends React.Component<UserProps | any, {}> {
     }
 
     public render() {
+        const navMenu = <NavMenu LoginOrLogout={ this.LoginOrLogout }/>;
         return <div className='container-fluid'>
             <div className='row contant-container'>
                 <div className='row col-sm-3 container-navmenu-chat'>
                     <div className='conteiner-navmenu col-sm-12 navmenu-col-sm-12'>
-                        <NavMenu LoginOrLogout={ this.LoginOrLogout }/>
+                        { <ConnectedRouter history={ this.props.history } children={ navMenu } /> }
                     </div>
                     <div className='col-sm-12 container-chat'>
-                        {/* { React.createElement(Chat) } */}
-                            <div id='react-chat' style={{height: '100%', width: '100%'}}>loading... </div>
-                        {/* </div> */}
+                        <div id='react-chat' style={{height: '100%', width: '100%'}}>loading... </div>
                     </div>
                 </div>
                 <div className='col-sm-9 container-content'>
-                    { this.props.children }
+                    { <ConnectedRouter history={ this.props.history } children={ this.props.children } /> }
                 </div>
             </div>
         </div>;
@@ -108,7 +106,7 @@ class Layout extends React.Component<UserProps | any, {}> {
     private TroubleLogin(str: string) {
         this.props.deleteUserInfo();
         this.props.showModal(str, true);
-        
+
         this.LoginOrLogout = <Login />;
     }
 }
@@ -116,7 +114,6 @@ class Layout extends React.Component<UserProps | any, {}> {
 function mapStateToProps (state: any) {
     return {
         user:       state.user      as UserState.UserState,
-        routing:    state.routing   as typeof routerReducer,
     } as IStateProps;
 }
 
@@ -130,8 +127,6 @@ function mapDispatchToProps(dispatch: any) {
 };
 
 export default connect(
-//(state: ApplicationState) => state.user,     // Selects which state properties are merged into the component's props
-//UserState.actionCreators                     // Selects which action creators are merged into the component's props
     mapStateToProps,
     mapDispatchToProps
 )(Layout) as typeof Layout;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import Message from "./Message";
@@ -15,9 +14,8 @@ interface IStateProps {
 type ChatState =
     IStateProps
     //ChatState.ChatState                   // ... state we've requested from the Redux store
-    & typeof ChatState.actionCreators      // ... plus action creators we've requested
-    & RouteComponentProps<{}>;              // ... plus incoming routing parameters
-
+    & typeof ChatState.actionCreators;      // ... plus action creators we've requested
+    //& RouteComponentProps<{}>;              // ... plus incoming routing parameters
 
 class Chat extends React.Component<ChatState, {}> {
     componentDidMount() {
@@ -73,11 +71,9 @@ class Chat extends React.Component<ChatState, {}> {
             placeholder="Ваше сообщение..." maxLength={50} onKeyDown={this.KeyHandler} disabled={disabledAttribut}/>;
 
         let templMessages = null;
-        if(chat.messages) templMessages = chat.messages.map(
-                (message, index) => {
-                // ({ steamId: steamId, userName: userName, message: message, date: date }, index) => {
+        if(chat.messages) 
+            templMessages = chat.messages.map((message, index) => {
                 return <Message message={message} key={index} />
-                // return <Message message={{steamId: steamId, userName:userName, message:message, date:date }} key={index} />
             }
         );
 
@@ -93,7 +89,6 @@ class Chat extends React.Component<ChatState, {}> {
             </div>
         </div>;
     }
-    //React.UIEvent<HTMLDivElement>
     ScrollHandler = (event: any) => {
         var div = event.target;
         if(this.props.chat.is_autoscroll) {

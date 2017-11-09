@@ -8,6 +8,7 @@ import { createMemoryHistory } from 'history';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import { routes } from './routes';
 import configureStore from './configureStore';
+import * as Layout from './container/Layout';
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
@@ -20,6 +21,7 @@ export default createServerRenderer(params => {
         // Prepare an instance of the application and perform an inital render that will
         // cause any async tasks (e.g., data access) to begin
         const routerContext: any = {};
+        const routeChildren = React.createElement(Layout.Layout, undefined, routes);
         const app = (
             <Provider store={ store }>
                 <StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
