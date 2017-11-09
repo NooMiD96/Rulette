@@ -15,6 +15,7 @@ export interface IStateProps {
     history:    History,
     children:   JSX.Element,
     user:       UserState.UserState,
+    preRender?: boolean,
 }
 export interface IDispatchProps {
     getUserInfo:        () => any,
@@ -86,19 +87,25 @@ export class Layout extends React.Component<UserProps, {}> {
     }
 
     public render() {
-        const navMenu = <NavMenu LoginOrLogout={ this.LoginOrLogout }/>;
+        const navMenu = <NavMenu LoginOrLogout={ this.LoginOrLogout } />;
         return <div className='container-fluid'>
             <div className='row contant-container'>
                 <div className='row col-sm-3 container-navmenu-chat'>
                     <div className='conteiner-navmenu col-sm-12 navmenu-col-sm-12'>
-                        { <ConnectedRouter history={ this.props.history } children={ navMenu } /> }
+                        { this.props.preRender 
+                            ? <NavMenu LoginOrLogout={ this.LoginOrLogout } />
+                            : <ConnectedRouter history={ this.props.history } children={ navMenu } /> 
+                        }
                     </div>
                     <div className='col-sm-12 container-chat'>
                         <div id='react-chat' style={{height: '100%', width: '100%'}}>loading... </div>
                     </div>
                 </div>
                 <div className='col-sm-9 container-content'>
-                    { <ConnectedRouter history={ this.props.history } children={ this.props.children } /> }
+                    { this.props.preRender 
+                        ? this.props.children
+                        : <ConnectedRouter history={ this.props.history } children={ this.props.children } /> 
+                    }
                 </div>
             </div>
         </div>;

@@ -10,7 +10,6 @@ import Warning from './components/Warning';
 import Lk from './components/Lk';
 import Chat from './components/Chat';
 
-
 export const routes = <div className="contentContainer">
     <Route exact path='/' component={ Home } />
     <Route path='/dota2' component={ Dota2 } />

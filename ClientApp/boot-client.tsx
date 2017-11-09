@@ -8,6 +8,7 @@ import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
+import * as H from 'history';
 import { createBrowserHistory } from 'history';
 import configureStore from './configureStore';
 import { ApplicationState }  from './store';
@@ -42,7 +43,7 @@ function renderApp() {
     ReactDOM.render(
         <AppContainer>
             <Provider store={ store }>
-                {React.createElement(Layout.default, { history } as Layout.IStateProps & Layout.IDispatchProps, routes) }
+                { React.createElement(Layout.default, { history: history as H.History, preRender: false } as Layout.IStateProps & Layout.IDispatchProps, routes) }
             </Provider>
         </AppContainer>,
         document.getElementById('react-app')

@@ -6,9 +6,10 @@ import { StaticRouter } from 'react-router-dom';
 import { replace } from 'react-router-redux';
 import { createMemoryHistory } from 'history';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
-import { routes } from './routes';
+import { routes, chat } from './routes';
 import configureStore from './configureStore';
 import * as Layout from './container/Layout';
+import { History } from 'history';
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
@@ -21,10 +22,11 @@ export default createServerRenderer(params => {
         // Prepare an instance of the application and perform an inital render that will
         // cause any async tasks (e.g., data access) to begin
         const routerContext: any = {};
-        const routeChildren = React.createElement(Layout.Layout, undefined, routes);
+        // make templ of react-app with param: preRender
+        const routeChildren = React.createElement(Layout.Layout, {preRender: true } as Layout.IStateProps & Layout.IDispatchProps, routes);
         const app = (
             <Provider store={ store }>
-                <StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
+                <StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routeChildren } />
             </Provider>
         );
         renderToString(app);
