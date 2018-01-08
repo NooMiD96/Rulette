@@ -4,9 +4,9 @@ import { Action, Reducer } from 'redux';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface ModalState {
-    show: boolean;
-    modalText: string;
-    canClose?: boolean;
+    show: boolean,
+    modalText: string,
+    canClose?: boolean,
 }
 
 // -----------------
@@ -16,11 +16,11 @@ export interface ModalState {
 
 interface ShowModalAction { 
     type: 'SHOW_MODAL_ACTION',
-    modalText: string;
-    canClose:boolean;
+    modalText: string,
+    canClose:boolean,
 }
 interface CloseModalAction { 
-    type: 'CLOSE_MODAL_ACTION' 
+    type: 'CLOSE_MODAL_ACTION',
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -35,16 +35,16 @@ export const actionCreators = {
     showModal: (text:string, canClose:boolean) => <ShowModalAction> { 
         type: 'SHOW_MODAL_ACTION',
         modalText: text,
-        canClose: canClose
+        canClose: canClose,
     },
     closeModal: () => <CloseModalAction>{ 
-        type: 'CLOSE_MODAL_ACTION'
+        type: 'CLOSE_MODAL_ACTION',
     }
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedState: ModalState = { show: false, modalText: '', canClose: undefined };
+const unloadedState: ModalState = { show: false, modalText: '', canClose: undefined, };
 
 export const reducer: Reducer<ModalState> = (state: ModalState, action: KnownAction) => {
     switch (action.type) {
@@ -52,13 +52,13 @@ export const reducer: Reducer<ModalState> = (state: ModalState, action: KnownAct
             return { 
                 show: true,
                 modalText: action.modalText,
-                canClose: action.canClose
+                canClose: action.canClose,
             };
         case 'CLOSE_MODAL_ACTION':
             return { 
                 show: false,
                 modalText: state.modalText,
-                canClose: state.canClose
+                canClose: state.canClose,
             };
         default:
             // The following line guarantees that every action in the KnownAction union has been covered by a case above

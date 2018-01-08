@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { NavLink, Link, RouteComponentProps } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { History } from 'history';
 
 export class NavMenu extends React.Component<{ LoginOrLogout:JSX.Element }, {}> {
     public render() {
@@ -14,7 +15,7 @@ export class NavMenu extends React.Component<{ LoginOrLogout:JSX.Element }, {}> 
                         <span className='icon-bar'></span>
                     </button>
                     { this.props.LoginOrLogout }
-                    <Link className='navbar-brand' to={'/'}>Rulette</Link>
+                    <Link className='navbar-brand' to={ '/' }>Rulette</Link>
                 </div>
                 <div className='clearfix'></div>
             </div>
@@ -50,4 +51,3 @@ export class NavMenu extends React.Component<{ LoginOrLogout:JSX.Element }, {}> 
         </div>;
     }
 }
-
