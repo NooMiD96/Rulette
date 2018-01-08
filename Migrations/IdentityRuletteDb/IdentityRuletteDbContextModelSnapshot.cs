@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Rulette.Identity;
 using System;
 
-namespace Rulette.Migrations
+namespace Rulette.Migrations.IdentityRuletteDb
 {
     [DbContext(typeof(IdentityRuletteDbContext))]
-    [Migration("20170825142146_Initial")]
-    partial class Initial
+    partial class IdentityRuletteDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

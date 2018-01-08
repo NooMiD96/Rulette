@@ -20,5 +20,12 @@ namespace Rulette.Controllers {
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Add(string name) {
+            var db = _context;
+            await db.AddNewItemAsync(name, User.Identity.Name);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

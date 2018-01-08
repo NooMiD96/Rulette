@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace Rulette.Migrations
+namespace Rulette.Migrations.IdentityRuletteDb
 {
-    public partial class Initial : Migration
+    public partial class FirstIdentityRuletteDbContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
